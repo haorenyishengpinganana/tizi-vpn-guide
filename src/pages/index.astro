@@ -52,6 +52,19 @@ const faq = [
   },
 ];
 
+const funnel = [
+  { label: '公开候选（去重后）', num: '2,936', pct: 100 },
+  { label: '完成双端测试', num: '56', pct: (56 / 2936) * 100 },
+  { label: '复测后保留', num: '26', pct: (26 / 2936) * 100 },
+];
+const protocols = [
+  { name: 'VLESS', alias: 'v2ray / Xray', enc: ['靠 TLS', ''], desc: '轻量协议，不依赖系统时间', note: '必须配合 TLS 或 REALITY 才安全' },
+  { name: 'VMess', alias: 'v2ray', enc: ['自带', 'ok'], desc: 'V2Ray 最早的加密协议', note: '依赖系统时间，Xray 要求误差在 120 秒内' },
+  { name: 'Trojan', alias: '', enc: ['靠 TLS', ''], desc: '使用真实 TLS，伪装成 HTTPS 网站', note: '需要域名和有效证书' },
+  { name: 'Shadowsocks', alias: 'ss', enc: ['自带', 'ok'], desc: '轻量的加密代理', note: '选用 AEAD 加密方式，如 aes-256-gcm' },
+  { name: 'HTTP / SOCKS5', alias: '', enc: ['无', 'bad'], desc: '普通代理，协议本身不加密', note: '免费列表里很常见，运营者能看到访问目标' },
+];
+
 const jsonLd = [
   { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.nameZh, alternateName: SITE.name, url: new URL(url(), Astro.site).href, inLanguage: 'zh-CN' },
   {
@@ -64,35 +77,74 @@ const jsonLd = [
 
 <Base title={title} description={description} lang="zh" keywords={keywords} jsonLd={jsonLd}>
   <section class="hero">
-    <h1>2026 免费节点、机场推荐与科学上网入门指南</h1>
-    <p>
-      免费 v2ray / ss / trojan 节点怎么找、为什么总是失效、安不安全？免费机场、公益机场和付费机场怎么选？
-      Clash 订阅怎么导入？这里用公开资料和实测来源，把这些问题一次讲清楚。
-    </p>
-    <a class="btn" href={url(guide)}>阅读：免费节点与付费机场怎么选</a>
-    <a class="btn ghost" href="#recommend">看推荐机场</a>
+    <div>
+      <span class="eyebrow">2026 更新 · 每篇注明来源</span>
+      <h1>2026 <em>免费节点</em>、机场推荐与科学上网入门指南</h1>
+      <p class="hero-lead">
+        免费 v2ray / ss / trojan 节点怎么找、为什么总失效、安不安全？免费机场、公益机场和付费机场怎么选？Clash 订阅怎么导入？用公开资料和实测来源，一次讲清楚。
+      </p>
+      <div class="btn-row">
+        <a class="btn" href={url(guide)}>阅读：免费节点与付费机场怎么选</a>
+        <a class="btn ghost" href="#recommend">看推荐机场</a>
+      </div>
+      <ul class="hero-tags">
+        <li>免费节点</li><li>公益机场</li><li>机场推荐</li><li>Clash 订阅</li><li>v2ray / ss / trojan</li>
+      </ul>
+    </div>
+    <aside class="stat-panel" aria-label="免费节点存活数据">
+      <h2>免费节点到底有多少能用？</h2>
+      <ol class="funnel">
+        {funnel.map((f) => (
+          <li>
+            <div class="row"><span>{f.label}</span><span class="num">{f.num}</span></div>
+            <div class="bar"><span style={`width:${f.pct}%`}></span></div>
+          </li>
+        ))}
+        <li class="bad">
+          <div class="row"><span>前一天的 27 条，次日复查失效</span><span class="num">24</span></div>
+          <div class="bar"><span style={`width:${(24 / 27) * 100}%`}></span></div>
+        </li>
+      </ol>
+      <p class="src">数据：<a href="https://jiedianshouce.com/free-nodes/" rel="nofollow noopener">节点手册</a> 2026-11-08/09 双端实测批次</p>
+    </aside>
   </section>
 
-  <section class="home-section">
-    <h2>大家最常问的问题</h2>
+  <section class="section">
+    <div class="section-head">
+      <div><h2>大家最常问的问题</h2><p>点击直接跳到详细解答</p></div>
+    </div>
     <div class="cards">
-      {topics.map((t) => (
-        <a class="card" href={t.href}><h3>{t.h}</h3><p>{t.p}</p></a>
+      {topics.map((t, i) => (
+        <a class="card" href={t.href}>
+          <span class="idx">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{t.h}</h3>
+          <p>{t.p}</p>
+          <span class="go">查看解答 →</span>
+        </a>
       ))}
     </div>
   </section>
 
-  <section class="home-section" id="recommend">
+  <section class="section" id="recommend">
     <div class="sponsor">
-      <h2>付费机场推荐：{SPONSOR.name}</h2>
-      <p>受够了免费节点每天失效？本站推荐的付费选择是 <strong>{SPONSOR.name}</strong>。注册后先选最短周期，在晚高峰实测满意再续费。</p>
-      <a class="btn" href={SPONSOR.url} rel="sponsored nofollow noopener" target="_blank">注册{SPONSOR.name} →</a>
+      <div class="sponsor-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path fill="#fff" d="M16 3l2.3 5.6 4-2.4-.8 6.3 5.5-1.3-2.6 5 3.6 1.6-6 3.2.9 2.8-5.4-.8-.5 6h-1.8l-.5-6-5.4.8.9-2.8-6-3.2 3.6-1.6-2.6-5 5.5 1.3-.8-6.3 4 2.4z"/></svg>
+      </div>
+      <div>
+        <span class="sponsor-label">本站推荐 · 付费机场</span>
+        <h2>{SPONSOR.name}</h2>
+        <p>受够了免费节点每天失效？先选最短周期，在晚高峰实测满意再续费。</p>
+      </div>
+      <a class="btn maple" href={SPONSOR.url} rel="sponsored nofollow noopener" target="_blank">立即注册 →</a>
       <p class="fine">披露：这是本站的推广/邀请链接，通过它注册或购买，本站可能获得佣金，你的价格不受影响。本站尚未发布其实测数据，套餐与价格以官网为准。</p>
     </div>
   </section>
 
-  <section class="home-section">
-    <h2>最新文章</h2>
+  <section class="section">
+    <div class="section-head">
+      <div><h2>最新文章</h2></div>
+      <a class="more" href={url('zh/')}>全部文章 →</a>
+    </div>
     {posts.length === 0 ? (
       <p class="meta">文章即将发布。</p>
     ) : (
@@ -106,30 +158,34 @@ const jsonLd = [
         ))}
       </div>
     )}
-    <p><a href={url('zh/')}>查看全部文章 →</a></p>
   </section>
 
-  <section class="home-section article">
-    <h2>常见节点协议速查：v2ray、ss、trojan 有什么区别？</h2>
-    <div class="prose">
+  <section class="section">
+    <div class="section-head">
+      <div><h2>节点协议速查：v2ray、ss、trojan 有什么区别？</h2><p>免费节点列表里最常见的五种协议</p></div>
+    </div>
+    <div class="table-wrap">
       <table>
-        <thead><tr><th>协议</th><th>一句话说明</th><th>使用时注意</th></tr></thead>
+        <thead><tr><th>协议</th><th>加密</th><th>一句话说明</th><th>使用时注意</th></tr></thead>
         <tbody>
-          <tr><td>VLESS（v2ray / Xray）</td><td>轻量协议，本身不依赖系统时间</td><td>必须配合 TLS 或 REALITY 才安全</td></tr>
-          <tr><td>VMess（v2ray）</td><td>V2Ray 最早的加密协议</td><td>依赖系统时间，Xray 要求误差在 120 秒内</td></tr>
-          <tr><td>Trojan</td><td>使用真实 TLS，伪装成 HTTPS 网站</td><td>需要域名和有效证书</td></tr>
-          <tr><td>Shadowsocks（ss）</td><td>轻量的加密代理</td><td>选用 AEAD 加密方式，如 aes-256-gcm</td></tr>
-          <tr><td>HTTP / SOCKS5</td><td>普通代理，协议本身不加密</td><td>免费列表里很常见，运营者能看到访问目标</td></tr>
+          {protocols.map((r) => (
+            <tr>
+              <td>{r.name}{r.alias && <span class="meta">（{r.alias}）</span>}</td>
+              <td><span class={`pill ${r.enc[1]}`}>{r.enc[0]}</span></td>
+              <td>{r.desc}</td>
+              <td>{r.note}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
   </section>
 
-  <section class="home-section home-faq">
-    <h2>常见问题</h2>
+  <section class="section">
+    <div class="section-head"><div><h2>常见问题</h2></div></div>
     <div class="faq">
-      {faq.map((f) => (
-        <details><summary>{f.q}</summary><p>{f.a}</p></details>
+      {faq.map((f, i) => (
+        <details open={i === 0}><summary>{f.q}</summary><p>{f.a}</p></details>
       ))}
     </div>
   </section>

@@ -22,7 +22,7 @@ const nav = [
   { href: url(), label: '首页', active: path === '/' },
   { href: url('zh/'), label: '全部文章', active: path === '/zh/' },
   { href: url('en/'), label: 'English', active: path.startsWith('/en') },
-  { href: url('rss.xml'), label: 'RSS', active: false },
+  { href: url('rss.xml'), label: 'RSS', active: false, cls: 'nav-rss' },
 ];
 ---
 
@@ -51,8 +51,14 @@ const nav = [
     <a class="skip" href="#main">{zh ? '跳到正文' : 'Skip to content'}</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="logo" href={url()}>{SITE.nameZh} <span class="logo-en">{SITE.name}</span></a>
-        <nav><ul>{nav.map((n) => <li><a href={n.href} aria-current={n.active ? 'page' : undefined}>{n.label}</a></li>)}</ul></nav>
+        <a class="logo" href={url()}>
+          <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <rect width="32" height="32" rx="9" fill="var(--primary)" />
+            <path d="M9 21.5 15 11l3.2 5.6M14 21.5l6-10.5 3 5.2" fill="none" stroke="var(--primary-ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          {SITE.nameZh}<span class="logo-en">{SITE.name}</span>
+        </a>
+        <nav><ul>{nav.map((n) => <li class={n.cls}><a href={n.href} aria-current={n.active ? 'page' : undefined}>{n.label}</a></li>)}</ul></nav>
       </div>
     </header>
     <main id="main" class="container">
