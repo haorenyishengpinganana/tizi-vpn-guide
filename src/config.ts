@@ -11,5 +11,5 @@ export const SITE = {
 /** 本站主推的付费服务（邀请链接）。出现处必须带推广披露、rel="sponsored" */
 export const SPONSOR = {
   name: '枫叶 Maple Relay',
-  url: 'https://www.maplerelay.net/#/signup?intl_signup=7PBQV1f9',
+  url: 'https://www.maplerelay.net/#/signup?intl_signup=3CNq7BzI',
 };

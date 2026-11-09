@@ -139,7 +139,7 @@ proxy-providers:
 
 如果你决定从免费节点换成付费服务，本站推荐 **枫叶 Maple Relay**（maplerelay.net）。
 
-<p><a href="https://www.maplerelay.net/#/signup?intl_signup=7PBQV1f9" rel="sponsored nofollow noopener" target="_blank"><strong>👉 点击注册枫叶 Maple Relay</strong></a></p>
+<p><a href="https://www.maplerelay.net/#/signup?intl_signup=3CNq7BzI" rel="sponsored nofollow noopener" target="_blank"><strong>👉 点击注册枫叶 Maple Relay</strong></a></p>
 
 **说明：** 上面是本站的邀请链接。通过它注册或购买，本站可能获得佣金，你的价格不受影响。本站目前**还没有发布枫叶的实测数据**，套餐、价格和节点覆盖范围请以官网注册后看到的为准。我们不写"秒开、永不掉线"这类无法验证的说法。
 
