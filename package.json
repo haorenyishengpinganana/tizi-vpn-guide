@@ -13,6 +13,7 @@
     "import": "node scripts/import-article.mjs"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.6",
     "@astrojs/rss": "^4.0.19",
     "astro": "^7.4.7"
   },

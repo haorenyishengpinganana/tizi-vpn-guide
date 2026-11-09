@@ -43,6 +43,15 @@ mainSitePost: https://主站/对应文章/   # 可选：主站有完整版时链
 
 缺少 title、description 或 sources 的文章，发布脚本会跳过并把它留在队列里，不会影响构建。
 
+## 推广链接
+
+文章里需要放枫叶注册链接时，写：
+
+- `[文字](sponsor:maple)`：普通文字链接
+- `[👉 注册枫叶 Maple Relay](sponsor:maple-button)`：橙色按钮
+
+构建时这些占位链接会自动替换成 `src/sponsor.mjs` 里的邀请链接，并加上 `rel="sponsored"`。**换邀请码只改 `src/sponsor.mjs` 一处。** 用了推广链接的文章，frontmatter 要写 `hasAffiliateLinks: true`。
+
 ## 本地开发
 
 需要 Node ≥ 22.23（本机是 Node 20 的话可以用 `npx -y -p node@24 -c 'npm run dev'`）。
