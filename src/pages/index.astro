@@ -1,28 +1,136 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE } from '../config';
+import { SITE, SPONSOR } from '../config';
 import { url } from '../lib/url';
-import { getPublishedPosts, fmtDate } from '../lib/posts';
+import { getPublishedPosts, fmtDateZh } from '../lib/posts';
 
-const posts = await getPublishedPosts('en');
+const posts = (await getPublishedPosts('zh')).slice(0, 10);
+
+const title = '2026 免费节点与机场推荐：免费 v2ray / Trojan 节点、Clash 订阅教程';
+const description =
+  '2026 年免费节点怎么找、安全吗、为什么总失效？免费机场、公益机场和付费机场有什么区别，Clash 订阅怎么导入、节点连不上怎么办，以及机场推荐与防跑路清单。';
+const keywords = [
+  '免费节点', '2026免费节点', '免费机场', '公益机场', '机场推荐', '免费v2ray节点', '免费ss节点',
+  '免费trojan节点', '节点订阅', 'Clash订阅', '科学上网', '免费VPN', '枫叶机场', 'Maple Relay',
+];
+
+const guide = 'zh/free-nodes-vs-paid-airport/';
+const a = (id: string) => url(`${guide}#${id}`);
+const topics = [
+  { h: '免费节点从哪里找？', p: '公开代理、试用订阅、个人分享三种来源，以及如何判断列表是否靠谱。', href: a('免费节点是从哪里来的') },
+  { h: '免费节点为什么总失效？', p: '几千条候选只剩几十条，一天后大多失效：背后的三个原因。', href: a('为什么免费节点今天能用明天就失效') },
+  { h: '免费节点安全吗？', p: 'HTTP / SOCKS5 明文代理与 VLESS、Trojan 的区别，以及用免费节点的底线。', href: a('免费节点安全吗会不会泄露隐私') },
+  { h: 'Clash 怎么导入免费节点订阅？', p: 'YAML 配置与 proxy-providers 订阅两种导入方式，附健康检查配置。', href: a('免费节点怎么导入-clash') },
+  { h: '节点连不上、超时怎么办？', p: '五步排查：失效、日期、协议兼容、系统时间、拥堵。', href: a('免费节点连不上超时怎么办') },
+  { h: '机场推荐怎么选？防跑路清单', p: '月付优先、看退款、高峰期实测：通用的机场选择清单。', href: a('机场推荐怎么挑一份通用的选择清单') },
+];
+
+const faq = [
+  {
+    q: '2026 年还能找到能用的免费节点吗？',
+    a: '能，但寿命很短。公开实测数据显示，几千条候选里通常只有几十条能通过测试，而且前一天能用的节点第二天大多已失效。免费节点适合临时救急，不适合长期使用。',
+  },
+  {
+    q: '免费节点、免费机场和公益机场有什么区别？',
+    a: '免费节点一般是单条或一批公开配置，需要自己导入；免费机场和公益机场是提供免费订阅的服务，通常有流量、速度或时长限制；“白嫖机场”多指付费机场的试用额度。三者的共同点是稳定性和运营者都没有保障。',
+  },
+  {
+    q: '免费 v2ray 节点安全吗？',
+    a: '协议加密只能防止路上的第三方，节点运营者仍能看到你的真实 IP 和访问目标。公开的免费节点里还有大量 HTTP / SOCKS5 明文代理。不要用免费节点登录支付、主邮箱和实名账户。',
+  },
+  {
+    q: '免费节点的订阅链接怎么导入 Clash？',
+    a: '在 Clash（mihomo / Clash.Meta 内核）客户端里导入 YAML 配置，或把订阅地址作为代理集合（proxy-providers）添加，并开启健康检查自动剔除失效节点。',
+  },
+  {
+    q: '机场推荐哪个？',
+    a: `本站目前推荐 ${SPONSOR.name}（推广链接，见首页说明）。不管选哪家，都建议先买最短周期、确认退款政策，并在晚高峰实际测试。`,
+  },
+  {
+    q: '本站提供免费节点或订阅地址吗？',
+    a: '不提供。本站专注于讲清楚免费节点和机场怎么选、怎么用、有什么风险，引用的测试数据都注明来源。',
+  },
+];
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.nameZh, alternateName: SITE.name, url: new URL(url(), Astro.site).href, inLanguage: 'zh-CN' },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
 ---
 
-<Base title={SITE.name} description={SITE.description}>
-  <div class="page-intro">
-    <h1>{SITE.name}</h1>
-    <p>{SITE.description}</p>
-  </div>
-  {posts.length === 0 ? (
-    <p class="meta">First articles are on the way.</p>
-  ) : (
-    <div class="post-list">
-      {posts.map((p) => (
-        <article class="post-card">
-          <p class="meta"><time datetime={p.data.pubDate.toISOString()}>{fmtDate(p.data.pubDate)}</time></p>
-          <h2><a href={url(`${p.id}/`)}>{p.data.title}</a></h2>
-          <p>{p.data.description}</p>
-        </article>
+<Base title={title} description={description} lang="zh" keywords={keywords} jsonLd={jsonLd}>
+  <section class="hero">
+    <h1>2026 免费节点、机场推荐与科学上网入门指南</h1>
+    <p>
+      免费 v2ray / ss / trojan 节点怎么找、为什么总是失效、安不安全？免费机场、公益机场和付费机场怎么选？
+      Clash 订阅怎么导入？这里用公开资料和实测来源，把这些问题一次讲清楚。
+    </p>
+    <a class="btn" href={url(guide)}>阅读：免费节点与付费机场怎么选</a>
+    <a class="btn ghost" href="#recommend">看推荐机场</a>
+  </section>
+
+  <section class="home-section">
+    <h2>大家最常问的问题</h2>
+    <div class="cards">
+      {topics.map((t) => (
+        <a class="card" href={t.href}><h3>{t.h}</h3><p>{t.p}</p></a>
       ))}
     </div>
-  )}
+  </section>
+
+  <section class="home-section" id="recommend">
+    <div class="sponsor">
+      <h2>付费机场推荐：{SPONSOR.name}</h2>
+      <p>受够了免费节点每天失效？本站推荐的付费选择是 <strong>{SPONSOR.name}</strong>。注册后先选最短周期，在晚高峰实测满意再续费。</p>
+      <a class="btn" href={SPONSOR.url} rel="sponsored nofollow noopener" target="_blank">注册{SPONSOR.name} →</a>
+      <p class="fine">披露：这是本站的推广/邀请链接，通过它注册或购买，本站可能获得佣金，你的价格不受影响。本站尚未发布其实测数据，套餐与价格以官网为准。</p>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <h2>最新文章</h2>
+    {posts.length === 0 ? (
+      <p class="meta">文章即将发布。</p>
+    ) : (
+      <div class="post-list">
+        {posts.map((p) => (
+          <article class="post-card">
+            <p class="meta"><time datetime={p.data.pubDate.toISOString()}>{fmtDateZh(p.data.pubDate)}</time></p>
+            <h3><a href={url(`${p.id}/`)}>{p.data.title}</a></h3>
+            <p>{p.data.description}</p>
+          </article>
+        ))}
+      </div>
+    )}
+    <p><a href={url('zh/')}>查看全部文章 →</a></p>
+  </section>
+
+  <section class="home-section article">
+    <h2>常见节点协议速查：v2ray、ss、trojan 有什么区别？</h2>
+    <div class="prose">
+      <table>
+        <thead><tr><th>协议</th><th>一句话说明</th><th>使用时注意</th></tr></thead>
+        <tbody>
+          <tr><td>VLESS（v2ray / Xray）</td><td>轻量协议，本身不依赖系统时间</td><td>必须配合 TLS 或 REALITY 才安全</td></tr>
+          <tr><td>VMess（v2ray）</td><td>V2Ray 最早的加密协议</td><td>依赖系统时间，Xray 要求误差在 120 秒内</td></tr>
+          <tr><td>Trojan</td><td>使用真实 TLS，伪装成 HTTPS 网站</td><td>需要域名和有效证书</td></tr>
+          <tr><td>Shadowsocks（ss）</td><td>轻量的加密代理</td><td>选用 AEAD 加密方式，如 aes-256-gcm</td></tr>
+          <tr><td>HTTP / SOCKS5</td><td>普通代理，协议本身不加密</td><td>免费列表里很常见，运营者能看到访问目标</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="home-section home-faq">
+    <h2>常见问题</h2>
+    <div class="faq">
+      {faq.map((f) => (
+        <details><summary>{f.q}</summary><p>{f.a}</p></details>
+      ))}
+    </div>
+  </section>
 </Base>

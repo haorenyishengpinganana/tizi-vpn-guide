@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../config';
+import { url } from '../../lib/url';
+import { getPublishedPosts, fmtDate } from '../../lib/posts';
+
+const posts = await getPublishedPosts('en');
+---
+
+<Base title={SITE.name} description={SITE.description}>
+  <div class="page-intro">
+    <h1>{SITE.name}</h1>
+    <p>{SITE.description}</p>
+  </div>
+  {posts.length === 0 ? (
+    <p class="meta">First articles are on the way.</p>
+  ) : (
+    <div class="post-list">
+      {posts.map((p) => (
+        <article class="post-card">
+          <p class="meta"><time datetime={p.data.pubDate.toISOString()}>{fmtDate(p.data.pubDate)}</time></p>
+          <h2><a href={url(`${p.id}/`)}>{p.data.title}</a></h2>
+          <p>{p.data.description}</p>
+        </article>
+      ))}
+    </div>
+  )}
+</Base>

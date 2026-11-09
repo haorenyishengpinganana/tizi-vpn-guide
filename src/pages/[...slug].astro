@@ -15,9 +15,9 @@ const d = post.data;
 const zh = d.lang === 'zh';
 const date = zh ? fmtDateZh : fmtDate;
 const t = zh
-  ? { home: '首页', homeHref: url('zh/'), published: '发布于', updated: '更新于', sources: '参考来源', full: '完整版请看：', fullLink: '阅读完整指南 →',
+  ? { home: '首页', homeHref: url(), published: '发布于', updated: '更新于', sources: '参考来源', full: '完整版请看：', fullLink: '阅读完整指南 →',
       disclosure: '披露：本文含推广/邀请链接，通过链接注册或购买，本站可能获得佣金，你的价格不受影响。推荐内容只写可核实的信息。' }
-  : { home: 'Home', homeHref: url(), published: 'Published', updated: 'Updated', sources: 'Sources', full: 'Want the full guide? ', fullLink: 'Read the in-depth version →',
+  : { home: 'Home', homeHref: url('en/'), published: 'Published', updated: 'Updated', sources: 'Sources', full: 'Want the full guide? ', fullLink: 'Read the in-depth version →',
       disclosure: 'Disclosure: this article contains referral links. We may earn a commission if you sign up, at no extra cost to you.' };
 ---
 
