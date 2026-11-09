@@ -7,6 +7,7 @@ export async function GET(context: APIContext) {
   const abs = (p: string) => new URL(url(p), context.site!).href;
   const entries = [
     `<url><loc>${abs('')}</loc></url>`,
+    `<url><loc>${abs('zh/')}</loc></url>`,
     ...posts.map(
       (p) => `<url><loc>${abs(`${p.id}/`)}</loc><lastmod>${(p.data.updatedDate ?? p.data.pubDate).toISOString().slice(0, 10)}</lastmod></url>`,
     ),

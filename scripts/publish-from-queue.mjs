@@ -33,7 +33,8 @@ for (const file of files) {
     continue;
   }
   const slugFile = file.replace(/^\d+[-_]/, '');
-  const dest = join(POSTS, slugFile);
+  // lang: zh 的文章发到 posts/zh/，网址为 /zh/<slug>/
+  const dest = join(POSTS, /^lang:\s*['"]?zh/m.test(fm) ? 'zh' : '', slugFile);
   if (existsSync(dest)) {
     console.warn(`跳过 ${file}：${dest} 已存在`);
     continue;

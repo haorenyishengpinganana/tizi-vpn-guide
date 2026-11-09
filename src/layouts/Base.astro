@@ -8,14 +8,16 @@ interface Props {
   description: string;
   type?: 'website' | 'article';
   published?: Date;
+  lang?: 'en' | 'zh';
 }
-const { title, description, type = 'website', published } = Astro.props;
+const { title, description, type = 'website', published, lang = 'en' } = Astro.props;
+const htmlLang = lang === 'zh' ? 'zh-CN' : SITE.lang;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
 ---
 
 <!doctype html>
-<html lang={SITE.lang}>
+<html lang={htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,7 +38,7 @@ const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
     <header class="site-header">
       <div class="container header-inner">
         <a class="logo" href={url()}>{SITE.name}</a>
-        <nav><ul><li><a href={url()}>Articles</a></li><li><a href={url('rss.xml')}>RSS</a></li></ul></nav>
+        <nav><ul><li><a href={url()}>Articles</a></li><li><a href={url('zh/')}>中文</a></li><li><a href={url('rss.xml')}>RSS</a></li></ul></nav>
       </div>
     </header>
     <main id="main" class="container">

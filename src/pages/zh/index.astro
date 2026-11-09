@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import { url } from '../../lib/url';
+import { getPublishedPosts, fmtDateZh } from '../../lib/posts';
+
+const posts = await getPublishedPosts('zh');
+const title = '代理协议与节点指南（中文）';
+const description = '免费节点、机场、Clash 配置与 VLESS / Trojan / Shadowsocks 等代理协议的中文说明，每篇注明参考来源。';
+---
+
+<Base title={title} description={description} lang="zh">
+  <div class="page-intro">
+    <h1>{title}</h1>
+    <p>{description}</p>
+  </div>
+  {posts.length === 0 ? (
+    <p class="meta">文章即将发布。</p>
+  ) : (
+    <div class="post-list">
+      {posts.map((p) => (
+        <article class="post-card">
+          <p class="meta"><time datetime={p.data.pubDate.toISOString()}>{fmtDateZh(p.data.pubDate)}</time></p>
+          <h2><a href={url(`${p.id}/`)}>{p.data.title}</a></h2>
+          <p>{p.data.description}</p>
+        </article>
+      ))}
+    </div>
+  )}
+</Base>
