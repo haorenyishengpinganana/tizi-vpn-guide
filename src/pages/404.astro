@@ -3,7 +3,10 @@ import Base from '../layouts/Base.astro';
 import { url } from '../lib/url';
 ---
 
-<Base title="Page not found" description="The page you are looking for does not exist on Proxy Protocols Explained.">
-  <h1>Page not found</h1>
-  <p><a href={url()}>Back to all articles</a></p>
+<Base title="页面不存在" description="你访问的页面不存在，返回梯子VPN指南首页查看免费节点、机场推荐与 Clash 教程。" lang="zh">
+  <div class="page-intro">
+    <span class="eyebrow">404</span>
+    <h1>页面不存在</h1>
+    <p><a href={url()}>返回首页</a> · <a href={url('zh/')}>查看全部文章</a></p>
+  </div>
 </Base>

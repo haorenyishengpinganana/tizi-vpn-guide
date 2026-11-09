@@ -1,5 +1,5 @@
 {
-  "name": "proxy-protocols-explained",
+  "name": "tizi-vpn-guide",
   "type": "module",
   "private": true,
   "engines": {
@@ -9,10 +9,15 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "publish:queue": "node scripts/publish-from-queue.mjs"
+    "publish:queue": "node scripts/publish-from-queue.mjs",
+    "import": "node scripts/import-article.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
     "astro": "^7.4.7"
+  },
+  "devDependencies": {
+    "turndown": "^7.2.5",
+    "turndown-plugin-gfm": "^1.0.2"
   }
 }

@@ -1,6 +1,6 @@
 export const SITE = {
-  name: 'Proxy Protocols Explained',
-  nameZh: '代理协议手册',
+  name: 'Tizi VPN Guide',
+  nameZh: '梯子VPN指南',
   description:
     'Plain-English explainers on how proxy and VPN protocols work: V2Ray, VMess, VLESS, Trojan, Shadowsocks, WireGuard and OpenVPN.',
   lang: 'en',

@@ -1,6 +1,6 @@
-# Proxy Protocols Explained
+# 梯子VPN指南 Tizi VPN Guide
 
-vpn-blog 的姊妹站，部署在 GitHub Pages：https://haorenyishengpinganana.github.io/proxy-protocols-explained/
+部署在 GitHub Pages：https://haorenyishengpinganana.github.io/tizi-vpn-guide/
 
 ## 文章流转
 
@@ -13,6 +13,19 @@ drafts/  ──(人工审核后 git mv)──▶  queue/  ──(Action 每天�
 - **每天 UTC 01:07（北京时间 09:07）** 由 GitHub Action 从队列取 N 篇、写入当天的 `pubDate`、提交并部署。
 - 每天发几篇：仓库的 Settings → Secrets and variables → Actions → Variables 里设 `POSTS_PER_DAY`，默认 1。
 - 想立即发一篇：Actions → Publish & Deploy → Run workflow。
+
+## 转载同事的文章（偶尔补位）
+
+队列空了、当天没有新文章时，可以转一篇同事站的文章进来：
+
+```
+npm run import -- https://jiedianshouce.com/articles/<文章>/ [--front] [--tags 标签1,标签2] [--desc "描述"]
+```
+
+- 默认排到队列末尾；加 `--front` 就排到最前面，下一次自动发布时先发它。
+- 导入时会自动处理：指向原站的链接只保留文字，推广链接只保留文字，原站站名改成"本站"；官方外链会保留，并收进 sources。
+- 标题、描述或来源不合格时会直接报错，不会进队列。描述不合格可以用 `--desc` 自己写一条。
+- 只用来偶尔补位，不要批量搬运。
 
 ## 文章格式
 
