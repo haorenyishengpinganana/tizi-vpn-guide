@@ -15,6 +15,7 @@ sources:
     url: https://clash-verge-rev.github.io/faq/windows.html
   - title: 'mihomo（Clash.Meta）文档'
     url: https://wiki.metacubex.one/
+pubDate: 2026-11-10
 ---
 
 想在电脑上用 Clash 系的梯子客户端，**Clash Verge Rev** 是目前最常被推荐的一款。这篇教程会讲清楚四件事：
