@@ -19,6 +19,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      urls: ${{ steps.publish.outputs.urls }}
     steps:
       - uses: actions/checkout@v7
 
@@ -29,6 +31,7 @@ jobs:
 
       # 定时/手动触发时才发布队列；push 触发只重新构建
       - name: Publish from queue
+        id: publish
         if: github.event_name != 'push'
         run: node scripts/publish-from-queue.mjs "${{ vars.POSTS_PER_DAY || 1 }}"
 
@@ -58,3 +61,11 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
+
+      # 有新文章时，部署完成后用 IndexNow 通知 Bing；失败不影响发布
+      - uses: actions/checkout@v7
+        if: needs.build.outputs.urls != ''
+      - name: Ping IndexNow
+        if: needs.build.outputs.urls != ''
+        continue-on-error: true
+        run: node scripts/indexnow.mjs ${{ needs.build.outputs.urls }}

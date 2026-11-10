@@ -6,7 +6,7 @@
  * 文件名约定：001-vmess-vs-vless.md → 网址 /vmess-vs-vless/（前面的数字只用来排队，发布时去掉）
  * 缺 title / description / sources 的文章会被跳过并留在队列里，不会搞坏当天的构建。
  */
-import { readdirSync, readFileSync, writeFileSync, unlinkSync, existsSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync, unlinkSync, existsSync, appendFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const QUEUE = 'queue';
@@ -21,6 +21,7 @@ if (files.length === 0) {
 }
 
 let published = 0;
+const urls = []; // 新文章的站内路径，交给 IndexNow
 for (const file of files) {
   if (published >= n) break;
   const src = join(QUEUE, file);
@@ -43,6 +44,8 @@ for (const file of files) {
   writeFileSync(dest, text.replace(m[0], `---\n${newFm}\n---\n`));
   unlinkSync(src);
   console.log(`已发布 ${file} → ${dest}`);
+  urls.push(dest.slice(POSTS.length + 1).replace(/\.md$/, '/'));
   published++;
 }
+if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `urls=${urls.join(' ')}\n`);
 console.log(`今天发布 ${published} 篇，队列剩余 ${readdirSync(QUEUE).filter((f) => f.endsWith('.md')).length} 篇`);
