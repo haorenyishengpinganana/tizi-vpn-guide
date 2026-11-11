@@ -17,6 +17,7 @@ sources:
     url: https://github.com/2dust/v2rayN/wiki/Description-of-system-proxy-routing
   - title: 'v2rayN Wiki：常见问题'
     url: https://github.com/2dust/v2rayN/wiki/Faq
+pubDate: 2026-11-11
 ---
 
 **v2rayN** 是最老牌的 v2ray 电脑客户端之一，现在的 7.x 版本已经不只支持 Windows，还支持 Linux 和 macOS。这篇教程以官方 Wiki 为准，讲清楚：
