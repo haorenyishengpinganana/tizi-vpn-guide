@@ -13,6 +13,7 @@ sources:
     url: https://github.com/2dust/v2rayNG
   - title: 'mihomo（Clash.Meta）文档'
     url: https://wiki.metacubex.one/
+pubDate: 2026-11-12
 ---
 
 安卓手机想用梯子，最常见的三个开源客户端是 **Clash Meta for Android**、**FlClash** 和 **v2rayNG**。它们都免费、开源，代码托管在 GitHub 上。区别主要在于**用什么内核**、**能导入哪种订阅**。
