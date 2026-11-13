@@ -15,6 +15,7 @@ sources:
     url: https://wiki.metacubex.one/config/proxy-groups/url-test/
   - title: 'Clash Verge Rev 文档：配置案例（多订阅合并）'
     url: https://clash-verge-rev.github.io/guide/config.html
+pubDate: 2026-11-13
 ---
 
 "机场跑路"几乎是每个用梯子的人都会碰上的事：昨天还好好的，今天节点全挂，官网打不开，客服也联系不上。
