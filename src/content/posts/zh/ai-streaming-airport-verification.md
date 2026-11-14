@@ -12,6 +12,7 @@ sources:
     url: https://support.google.com/gemini/answer/13575153?hl=en
   - title: 'Netflix VPN说明'
     url: https://help.netflix.com/en/node/114701/
+pubDate: 2026-11-14
 ---
 AI与流媒体是否可用，必须落到具体平台、入口、节点、账号、设备和测试时间。线路名称、节点地区和一次成功不能证明整家机场长期支持全部平台。
 
