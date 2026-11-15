@@ -15,6 +15,7 @@ sources:
     url: https://apps.apple.com/us/app/surge-5/id1442620678
   - title: 'Apple 支持：更改 Apple 账户国家或地区'
     url: https://support.apple.com/zh-cn/118283
+pubDate: 2026-11-15
 ---
 
 安卓手机可以直接从 GitHub 下载 APK，iPhone 不行：**iPhone 只能从 App Store 安装 App**，而常用的梯子客户端在中国区 App Store 都搜不到。
