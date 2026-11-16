@@ -15,6 +15,7 @@ sources:
     url: https://github.com/2dust/v2rayN/wiki/Description-of-subscription
   - title: 'subconverter（订阅转换工具）'
     url: https://github.com/tindy2013/subconverter
+pubDate: 2026-11-16
 ---
 
 买了机场之后，后台往往有好几个"复制订阅"按钮：**Clash 订阅**、**通用订阅**、**v2ray 订阅**、**Shadowrocket 订阅**……很多人随便复制一个，结果客户端提示"导入失败"或"配置格式错误"。
