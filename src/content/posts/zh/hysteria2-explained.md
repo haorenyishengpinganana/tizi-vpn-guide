@@ -17,6 +17,7 @@ sources:
     url: https://wiki.metacubex.one/config/proxies/hysteria2/
   - title: 'Hysteria GitHub 仓库'
     url: https://github.com/HyNetworks/hysteria
+pubDate: 2026-11-17
 ---
 
 机场的节点列表里，经常能看到名字带 **Hysteria2** 或 **hy2** 的节点，很多人说它"速度特别快"。这篇文章用官方文档讲清楚：
