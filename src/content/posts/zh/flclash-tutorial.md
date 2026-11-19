@@ -11,6 +11,7 @@ sources:
     url: https://github.com/chen08209/FlClash/releases
   - title: 'mihomo（Clash.Meta）文档'
     url: https://wiki.metacubex.one/
+pubDate: 2026-11-19
 ---
 
 **FlClash** 是近两年很火的 Clash 系客户端，最大的特点是**一个 App 覆盖安卓、Windows、macOS 和 Linux**，手机和电脑用同一套界面。
